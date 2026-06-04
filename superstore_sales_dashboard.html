@@ -1,0 +1,178 @@
+
+<style>
+.dash { padding: 1rem 0; font-family: var(--font-sans); }
+.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.5rem; }
+.kpi { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 14px 16px; }
+.kpi-label { font-size: 12px; color: var(--color-text-secondary); margin: 0 0 4px; }
+.kpi-value { font-size: 22px; font-weight: 500; color: var(--color-text-primary); margin: 0; }
+.kpi-sub { font-size: 12px; color: var(--color-text-secondary); margin: 2px 0 0; }
+.section { margin-bottom: 2rem; }
+.section-title { font-size: 14px; font-weight: 500; color: var(--color-text-secondary); margin: 0 0 10px; letter-spacing: 0.04em; text-transform: uppercase; }
+.charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 1.5rem; }
+.chart-box { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 16px; }
+.chart-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 12px; }
+.legend { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; font-size: 12px; color: var(--color-text-secondary); }
+.legend span { display: flex; align-items: center; gap: 5px; }
+.legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+.full-box { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 16px; margin-bottom: 1.5rem; }
+.insight-box { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 14px 16px; margin-bottom: 1.5rem; font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+.insight-box strong { color: var(--color-text-primary); font-weight: 500; }
+</style>
+
+<div class="dash">
+<h2 class="sr-only">Superstore sales performance dashboard, 2014–2017</h2>
+
+<div class="kpi-grid">
+  <div class="kpi"><p class="kpi-label">Total sales</p><p class="kpi-value">$2.30M</p><p class="kpi-sub">9,994 orders</p></div>
+  <div class="kpi"><p class="kpi-label">Total profit</p><p class="kpi-value">$286K</p><p class="kpi-sub">12.4% margin</p></div>
+  <div class="kpi"><p class="kpi-label">Top region</p><p class="kpi-value">West</p><p class="kpi-sub">$725K in sales</p></div>
+  <div class="kpi"><p class="kpi-label">Best category</p><p class="kpi-value">Technology</p><p class="kpi-sub">$145K profit</p></div>
+</div>
+
+<div class="charts-row">
+  <div class="chart-box">
+    <p class="chart-title">Sales vs profit by category</p>
+    <div class="legend">
+      <span><span class="legend-dot" style="background:#378ADD"></span>Sales</span>
+      <span><span class="legend-dot" style="background:#1D9E75"></span>Profit</span>
+    </div>
+    <div style="position:relative;height:200px;"><canvas id="catChart" role="img" aria-label="Bar chart comparing sales and profit across three categories. Technology leads profit, Furniture barely profitable.">Furniture: Sales 742K Profit 18K. Office Supplies: Sales 719K Profit 122K. Technology: Sales 836K Profit 145K.</canvas></div>
+  </div>
+  <div class="chart-box">
+    <p class="chart-title">Sales by region</p>
+    <div class="legend">
+      <span><span class="legend-dot" style="background:#7F77DD"></span>West</span>
+      <span><span class="legend-dot" style="background:#378ADD"></span>East</span>
+      <span><span class="legend-dot" style="background:#1D9E75"></span>Central</span>
+      <span><span class="legend-dot" style="background:#EF9F27"></span>South</span>
+    </div>
+    <div style="position:relative;height:200px;"><canvas id="regionChart" role="img" aria-label="Pie chart of sales by region. West 31%, East 29%, Central 22%, South 17%.">West: $725K. East: $679K. Central: $501K. South: $392K.</canvas></div>
+  </div>
+</div>
+
+<div class="full-box">
+  <p class="chart-title">Annual growth: sales & profit (2014–2017)</p>
+  <div class="legend">
+    <span><span class="legend-dot" style="background:#378ADD"></span>Sales</span>
+    <span><span class="legend-dot" style="background:#1D9E75"></span>Profit</span>
+  </div>
+  <div style="position:relative;height:220px;"><canvas id="yearChart" role="img" aria-label="Line chart showing sales and profit growing from 2014 to 2017.">2014: Sales 484K Profit 50K. 2015: Sales 471K Profit 62K. 2016: Sales 609K Profit 82K. 2017: Sales 733K Profit 93K.</canvas></div>
+</div>
+
+<div class="charts-row">
+  <div class="chart-box">
+    <p class="chart-title">Profit by sub-category (top & bottom 5)</p>
+    <div style="position:relative;height:240px;"><canvas id="subChart" role="img" aria-label="Horizontal bar chart showing copiers as top profit sub-category and tables as a loss-maker.">Copiers +56K, Phones +45K, Accessories +42K, Paper +34K, Binders +30K; Fasteners +1K, Machines +3K, Supplies -1K, Bookcases -3K, Tables -18K.</canvas></div>
+  </div>
+  <div class="chart-box">
+    <p class="chart-title">Sales by customer segment</p>
+    <div class="legend">
+      <span><span class="legend-dot" style="background:#7F77DD"></span>Consumer</span>
+      <span><span class="legend-dot" style="background:#378ADD"></span>Corporate</span>
+      <span><span class="legend-dot" style="background:#1D9E75"></span>Home Office</span>
+    </div>
+    <div style="position:relative;height:200px;"><canvas id="segChart" role="img" aria-label="Doughnut chart of sales by customer segment. Consumer is the largest at 50%.">Consumer: $1.16M. Corporate: $706K. Home Office: $430K.</canvas></div>
+  </div>
+</div>
+
+<div class="full-box">
+  <p class="chart-title">2017 monthly sales trend</p>
+  <div class="legend">
+    <span><span class="legend-dot" style="background:#378ADD"></span>Sales</span>
+    <span><span class="legend-dot" style="background:#1D9E75"></span>Profit</span>
+  </div>
+  <div style="position:relative;height:200px;"><canvas id="monthChart" role="img" aria-label="Line chart showing 2017 monthly sales peaking in November.">Jan 44K, Feb 20K, Mar 59K, Apr 37K, May 44K, Jun 53K, Jul 45K, Aug 63K, Sep 88K, Oct 78K, Nov 118K, Dec 84K.</canvas></div>
+</div>
+
+<div class="insight-box">
+  <strong>Story in numbers:</strong> Sales grew 51% from 2014 to 2017, but profit margin remained thin (12%). <strong>Furniture is the silent loser</strong> — $742K in sales yet only $18K profit; Tables alone lost $17,725. <strong>Technology punches hardest</strong>: Copiers alone generate $55K profit. <strong>Discounting is the culprit</strong> — rows with 45–80% discounts are visibly loss-making. The West region dominates, and <strong>Q4 is king</strong> — November 2017 alone hit $118K in a single month.
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const isDark = matchMedia('(prefers-color-scheme: dark)').matches;
+const gridColor = isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.06)';
+const textColor = isDark ? '#aaa' : '#666';
+const baseOpts = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } };
+
+new Chart(document.getElementById('catChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Furniture','Office Supplies','Technology'],
+    datasets: [
+      { label: 'Sales', data: [742000, 719047, 836154], backgroundColor: '#378ADD', borderRadius: 4 },
+      { label: 'Profit', data: [18451, 122491, 145455], backgroundColor: '#1D9E75', borderRadius: 4 }
+    ]
+  },
+  options: { ...baseOpts, scales: {
+    x: { ticks: { color: textColor, font: { size: 11 } }, grid: { display: false } },
+    y: { ticks: { color: textColor, font: { size: 11 }, callback: v => '$' + (v/1000).toFixed(0) + 'K' }, grid: { color: gridColor } }
+  }}
+});
+
+new Chart(document.getElementById('regionChart'), {
+  type: 'pie',
+  data: {
+    labels: ['West','East','Central','South'],
+    datasets: [{ data: [725458, 678781, 501240, 391722], backgroundColor: ['#7F77DD','#378ADD','#1D9E75','#EF9F27'], borderWidth: 2, borderColor: isDark ? '#222' : '#fff' }]
+  },
+  options: { ...baseOpts, plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ' $' + Math.round(ctx.raw/1000) + 'K' } } } }
+});
+
+new Chart(document.getElementById('yearChart'), {
+  type: 'line',
+  data: {
+    labels: ['2014','2015','2016','2017'],
+    datasets: [
+      { label: 'Sales', data: [484247, 470533, 609206, 733215], borderColor: '#378ADD', backgroundColor: 'rgba(55,138,221,0.08)', tension: 0.35, fill: true, pointRadius: 5, pointBackgroundColor: '#378ADD' },
+      { label: 'Profit', data: [49544, 61619, 81795, 93439], borderColor: '#1D9E75', backgroundColor: 'rgba(29,158,117,0.08)', tension: 0.35, fill: true, pointRadius: 5, pointBackgroundColor: '#1D9E75' }
+    ]
+  },
+  options: { ...baseOpts, scales: {
+    x: { ticks: { color: textColor }, grid: { display: false } },
+    y: { ticks: { color: textColor, callback: v => '$' + Math.round(v/1000) + 'K' }, grid: { color: gridColor } }
+  }}
+});
+
+const subLabels = ['Tables','Bookcases','Supplies','Fasteners','Machines','Binders','Paper','Accessories','Phones','Copiers'];
+const subData = [-17725,-3473,-1189,950,3385,30222,34054,41937,44516,55618];
+const subColors = subData.map(v => v < 0 ? '#E24B4A' : '#1D9E75');
+new Chart(document.getElementById('subChart'), {
+  type: 'bar',
+  data: {
+    labels: subLabels,
+    datasets: [{ label: 'Profit', data: subData, backgroundColor: subColors, borderRadius: 3 }]
+  },
+  options: { ...baseOpts, indexAxis: 'y',
+    scales: {
+      x: { ticks: { color: textColor, font:{size:10}, callback: v => '$' + (v/1000).toFixed(0) + 'K' }, grid: { color: gridColor } },
+      y: { ticks: { color: textColor, font:{size:11} }, grid: { display: false } }
+    }
+  }
+});
+
+new Chart(document.getElementById('segChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Consumer','Corporate','Home Office'],
+    datasets: [{ data: [1161401, 706146, 429653], backgroundColor: ['#7F77DD','#378ADD','#1D9E75'], borderWidth: 2, borderColor: isDark ? '#222' : '#fff' }]
+  },
+  options: { ...baseOpts, cutout: '62%', plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ' $' + Math.round(ctx.raw/1000) + 'K' } } } }
+});
+
+new Chart(document.getElementById('monthChart'), {
+  type: 'line',
+  data: {
+    labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    datasets: [
+      { label: 'Sales', data: [43971,20301,58872,36522,44261,52982,45264,63121,87867,77777,118448,83829], borderColor: '#378ADD', tension: 0.35, fill: false, pointRadius: 4, pointBackgroundColor: '#378ADD' },
+      { label: 'Profit', data: [7140,1614,14752,933,6343,8223,6953,9041,10992,9275,9690,8483], borderColor: '#1D9E75', tension: 0.35, fill: false, pointRadius: 4, pointBackgroundColor: '#1D9E75', borderDash: [5,4] }
+    ]
+  },
+  options: { ...baseOpts, scales: {
+    x: { ticks: { color: textColor, font:{size:11}, autoSkip: false }, grid: { display: false } },
+    y: { ticks: { color: textColor, callback: v => '$' + Math.round(v/1000) + 'K' }, grid: { color: gridColor } }
+  }}
+});
+</script>
